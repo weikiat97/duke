@@ -14,20 +14,21 @@ public class Duke {
                 String input = sc.nextLine();
                 String myArray[];
                 myArray = input.split(" ");
-                if (input.equals("bye")) {
+                String currTask = myArray[0];
+                if (currTask.equals("bye")) {
                     System.out.println("Bye. hope to see you again soon!");
                     break;
-                } else if (input.equals("list")) {
+                } else if (currTask.equals("list")) {
                     for (int i = 1; i < lst.size() + 1; i++) {
                         System.out.println(i + "." + lst.get(i - 1));
                     }
-                } else if (myArray[0].equals("done")) {
+                } else if (currTask.equals("done")) {
                     String numString = myArray[1];
                     int num = Integer.valueOf(numString);
                     Task curr = lst.get(num - 1);
                     curr.isDone();
                     System.out.println(curr.doneJob());
-                } else if (myArray[0].equals("deadline")) {
+                } else if (currTask.equals("deadline")) {
                     int cutoff = 0;
                     String task = "";
                     String time = "";
@@ -49,7 +50,7 @@ public class Duke {
                     counter++;
                     System.out.println("Got it. I've added this task:\n  " + lst.get(counter - 1)
                             + "\nNow you have " + counter + " tasks in the list.");
-                } else if (myArray[0].equals("event")) {
+                } else if (currTask.equals("event")) {
                     int cutoff = 0;
                     String task = "";
                     String time = "";
@@ -71,7 +72,7 @@ public class Duke {
                     counter++;
                     System.out.println("Got it. I've added this task:\n  " + lst.get(counter - 1)
                             + "\nNow you have " + counter + " tasks in the list.");
-                } else if (myArray[0].equals("todo")) {
+                } else if (currTask.equals("todo")) {
                     String task = "";
                     for (int j = 1; j < myArray.length; j++) {
                         task += " ";
@@ -81,12 +82,21 @@ public class Duke {
                     counter++;
                     System.out.println("Got it. I've added this task:\n  " + lst.get(counter - 1)
                             + "\nNow you have " + counter + " tasks in the list.");
+                } else if (currTask.equals("delete")) {
+                    String numString = myArray[1];
+                    int num = Integer.valueOf(numString);
+                    Task curr = lst.remove(num - 1);
+                    counter--;
+                    System.out.println("Noted. I've removed this task:\n  " + curr
+                            + "\nNow you have " + counter + " tasks in the list.");
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
         } catch (DukeException e) {
                 System.out.println(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+                System.out.println("Invalid item in the list!");
         }
     }
 }
