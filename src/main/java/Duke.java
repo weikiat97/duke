@@ -28,6 +28,7 @@ public class Duke {
                     Task curr = lst.get(num - 1);
                     curr.isDone();
                     System.out.println(curr.doneJob());
+                    storage.writeFile(lst);
                 } else if (currTask.equals("deadline")) {
                     int cutoff = 0;
                     String task = "";
@@ -54,6 +55,7 @@ public class Duke {
                     counter++;
                     System.out.println("Got it. I've added this task:\n  " + lst.get(counter - 1)
                             + "\nNow you have " + counter + " tasks in the list.");
+                    storage.writeFile(lst);
                 } else if (currTask.equals("event")) {
                     int cutoff = 0;
                     String task = "";
@@ -80,6 +82,7 @@ public class Duke {
                     counter++;
                     System.out.println("Got it. I've added this task:\n  " + lst.get(counter - 1)
                             + "\nNow you have " + counter + " tasks in the list.");
+                    storage.writeFile(lst);
                 } else if (currTask.equals("todo")) {
                     String task = "";
                     for (int j = 1; j < myArray.length; j++) {
@@ -92,6 +95,7 @@ public class Duke {
                     counter++;
                     System.out.println("Got it. I've added this task:\n  " + lst.get(counter - 1)
                             + "\nNow you have " + counter + " tasks in the list.");
+                    storage.writeFile(lst);
                 } else if (currTask.equals("delete")) {
                     String numString = myArray[1];
                     int num = Integer.valueOf(numString);
@@ -99,6 +103,7 @@ public class Duke {
                     counter--;
                     System.out.println("Noted. I've removed this task:\n  " + curr
                             + "\nNow you have " + counter + " tasks in the list.");
+                    storage.writeFile(lst);
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
