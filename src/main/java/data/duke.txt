@@ -1,0 +1,6 @@
+T | 1 | read book
+T | 0 | hello
+T | 0 | lolol
+T | 1 | bij
+E | 0 | heloooooo | wednesday
+E | 0 | project meeting | Aug 6th 2-4pm

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -5,10 +6,10 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
+        Storage storage = new Storage("./duke/src/main/java/data/duke.txt");
+        ArrayList<Task> lst = storage.readFile();
+        int counter = lst.size();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        ArrayList<Task> lst = new ArrayList<Task>();
-        int counter = 0;
-
         try {
             while (sc.hasNext()) {
                 String input = sc.nextLine();
@@ -37,13 +38,17 @@ public class Duke {
                             cutoff = j;
                             break;
                         } else {
-                            task += " ";
+                            if (j != 1) {
+                                task += " ";
+                            }
                             task += myArray[j];
                             cutoff = j;
                         }
                     }
                     for (int k = cutoff + 1; k < myArray.length; k++) {
-                        time += " ";
+                        if (k != cutoff + 1) {
+                            time += " ";
+                        }
                         time += myArray[k];
                     }
                     lst.add(new Deadline(task, time));
@@ -59,13 +64,17 @@ public class Duke {
                             cutoff = j;
                             break;
                         } else {
-                            task += " ";
+                            if (j != 1) {
+                                task += " ";
+                            }
                             task += myArray[j];
                             cutoff = j;
                         }
                     }
                     for (int k = cutoff + 1; k < myArray.length; k++) {
-                        time += " ";
+                        if (k != cutoff + 1) {
+                            time += " ";
+                        }
                         time += myArray[k];
                     }
                     lst.add(new Event(task, time));
@@ -75,7 +84,9 @@ public class Duke {
                 } else if (currTask.equals("todo")) {
                     String task = "";
                     for (int j = 1; j < myArray.length; j++) {
-                        task += " ";
+                        if (j != 1) {
+                            task += " ";
+                        }
                         task += myArray[j];
                     }
                     lst.add(new ToDo(task));
@@ -93,98 +104,13 @@ public class Duke {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
+            storage.writeFile(lst);
         } catch (DukeException e) {
                 System.out.println(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
                 System.out.println("Invalid item in the list!");
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
         }
-    }
-}
-
-class Task {
-    protected String job;
-    protected String status;
-
-    public Task(String job) {
-        this.job = job;
-        this.status = "[✗]";
-    }
-
-    public void isDone() {
-        this.status = "[✓]";
-    }
-
-    public String doneJob() {
-        return "Nice! I've marked this task as done:\n  " + status + " " + job;
-    }
-
-    @Override
-    public String toString() {
-        return status + job;
-    }
-
-}
-
-class ToDo extends Task {
-
-    public ToDo(String job) throws DukeException {
-        super(job);
-        String check = job;
-        if (job.equals("")) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
-    }
-
-}
-
-class Event extends Task {
-
-    protected String at;
-
-    public Event(String job, String at) throws DukeException {
-        super(job);
-        this.at = at;
-        if (job.equals("")) {
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-        } else if (at.equals("")) {
-            throw new DukeException("☹ OOPS!!! The date/time of an event cannot be empty.");
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "[E]" + super.toString() + " (at:" + at + ")";
-    }
-}
-
-class Deadline extends Task {
-
-    protected String by;
-
-    public Deadline(String job, String by) throws DukeException{
-        super(job);
-        this.by = by;
-        if (job.equals("")) {
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-        } else if (by.equals("")) {
-            throw new DukeException("☹ OOPS!!! The date/time of an event cannot be empty.");
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by:" + by + ")";
-    }
-}
-
-class DukeException extends Exception {
-
-    public DukeException(String message) {
-        super(message);
     }
 }
