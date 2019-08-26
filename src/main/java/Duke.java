@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
 public class Duke {
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
@@ -106,7 +105,7 @@ public class Duke {
             }
             storage.writeFile(lst);
         } catch (DukeException e) {
-                System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
                 System.out.println("Invalid item in the list!");
         } catch (IOException e) {
@@ -114,3 +113,4 @@ public class Duke {
         }
     }
 }
+

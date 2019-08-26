@@ -23,9 +23,6 @@ public class Storage {
             s = new Scanner(f);
             while (s.hasNext()) {
                 String[] input = s.nextLine().split(" \\| ");
-                System.out.println(input[0]);
-                System.out.println(input[1]);
-                System.out.println(input[2]);
                 switch (input[0]) {
                 case "T":
                     ToDo toDo = new ToDo(input[2]);
