@@ -104,4 +104,20 @@ public class Ui {
     public void showError(String message) {
         System.out.println(message);
     }
+
+    /**
+     * Prints the message before showing the matching tasks.
+     */
+    public void printFindMessage() {
+        System.out.println("     Here are the matching tasks in your list:");
+    }
+
+    /**
+     * Prints the task with the found keyword.
+     * @param counter index of the found keyword.
+     * @param task task with the found keyword.
+     */
+    public void printFoundMessage(int counter, Task task) {
+        System.out.println("     " + counter + "." + task);
+    }
 }

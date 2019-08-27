@@ -22,6 +22,13 @@ public class Task {
         this.status = "[✓]";
     }
 
+    /**
+     * Find the job of the task.
+     * @return the task's job.
+     */
+    public String getJob() {
+        return this.job;
+    }
 
     /**
      * Formats the task to be added to the txt file.
