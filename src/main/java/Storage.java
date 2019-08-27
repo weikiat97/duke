@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 public class Storage {
 
@@ -15,8 +14,8 @@ public class Storage {
         this.path = path;
     }
 
-    public ArrayList<Task> readFile() throws DukeException {
-        ArrayList<Task> currentList = new ArrayList<Task>();
+    public TaskList readFile() throws DukeException {
+        TaskList currentList = new TaskList();
         try {
             System.out.println(path);
             f = new File(path);
@@ -56,11 +55,11 @@ public class Storage {
         }
     }
 
-    public void writeFile(ArrayList<Task> list) throws IOException {
+    public void writeFile(TaskList list) throws IOException {
         try {
             FileWriter fw = new FileWriter(path);
-            for (Task task : list) {
-                fw.write(task.outputToFile() + "\n");
+            for (int i = 0; i < list.size(); i++) {
+                fw.write(list.get(i).outputToFile() + "\n");
             }
             fw.close();
         } catch (IOException e) {
