@@ -12,8 +12,12 @@ public class Task {
         this.status = "[✓]";
     }
 
-    public String doneJob() {
-        return "Nice! I've marked this task as done:\n  " + status + " " + job;
+    /**
+     * Find the job of the task.
+     * @return the task's job.
+     */
+    public String getJob() {
+        return this.job;
     }
 
     public String outputToFile() {

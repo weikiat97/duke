@@ -69,6 +69,9 @@ public class Parser {
                 task3 += myArray[j];
             }
             return new AddCommand(new ToDo(task3));
+        case "find":
+            String keyword = myArray[1];
+            return new FindCommand(keyword);
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
