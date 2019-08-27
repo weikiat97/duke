@@ -2,11 +2,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Class to represent the Event tasks.
+ */
 public class Event extends Task {
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
     protected Date date;
 
+    /**
+     * Constructs a new Event task.
+     * @param job the Event task to be added to the task list.
+     * @param at the time of the event.
+     * @throws DukeException if the description or the date and time of the event is empty.
+     */
     public Event(String job, String at) throws DukeException {
         super(job);
         try {
@@ -22,6 +31,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Formats the Event task to be added to the txt file.
+     * @return String to be added to the txt file.
+     */
     @Override
     public String outputToFile() {
         return String.format("E | %d | %s | %s", this.status.equals("[✓]") ? 1 : 0, this.job, sdf.format(date));

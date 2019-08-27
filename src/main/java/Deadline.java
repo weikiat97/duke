@@ -2,11 +2,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Class to represent the Deadline tasks.
+ */
 public class Deadline extends Task {
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
     protected Date date;
 
+    /**
+     * Constructs a new Deadline task.
+     * @param job the Deadline task to be added to the task list.
+     * @param by the time of the deadline.
+     * @throws DukeException
+     */
     public Deadline(String job, String by) throws DukeException {
         super(job);
         try {
@@ -22,6 +31,10 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Formats the Deadline task to be added to the txt file.
+     * @return String to be added to the txt file.
+     */
     @Override
     public String outputToFile() {
         return String.format("D | %d | %s | %s", this.status.equals("[✓]") ? 1 : 0, this.job, sdf.format(date));

@@ -4,16 +4,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+/**
+ * Storage class to deal with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
 
     private String path;
     private File f;
     private Scanner s;
 
+    /**
+     * Constructor to make a new storage with the txt file.
+     * @param path
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Reads the txt file for previously saved list.
+     * @return TaskList which has all the task.
+     * @throws DukeException if the task type is different from the expected commands.
+     */
     public TaskList readFile() throws DukeException {
         TaskList currentList = new TaskList();
         try {
@@ -55,6 +67,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes new items to the txt file and saves it.
+     * @param list TaskList to write each task into the txt file.
+     * @throws IOException if there is an error with input or output.
+     */
     public void writeFile(TaskList list) throws IOException {
         try {
             FileWriter fw = new FileWriter(path);

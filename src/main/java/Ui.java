@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -31,6 +30,10 @@ public class Ui {
         System.out.println("     What can I do for you?");
     }
 
+    /**
+     * Reads the command by user.
+     * @return String of command by user.
+     */
     public String readCommand() {
         return sc.nextLine();
     }
@@ -79,14 +82,25 @@ public class Ui {
         System.out.println("       " + current);
     }
 
+    /**
+     * Prints the number of tasks in task list.
+     * @param tasks task list to find number of tasks from.
+     */
     public void printNumberOfTasksMessage(TaskList tasks) {
         System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Shows loading error when Duke is unable to find the file.
+     */
     public void showLoadingError() {
         System.out.println("File not found! Starting from a new list now...");
     }
 
+    /**
+     * Shows error message.
+     * @param message error message.
+     */
     public void showError(String message) {
         System.out.println(message);
     }

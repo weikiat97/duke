@@ -1,5 +1,14 @@
+/**
+ * Class to parse the input by the user into a command.
+ */
 public class Parser {
 
+    /**
+     * Takes in the full string and processes the string into a command.
+     * @param fullCommand input by the user.
+     * @return Command to be executed later.
+     * @throws DukeException if the command is unknown.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String myArray[] = fullCommand.split(" ");
         String command = myArray[0];
