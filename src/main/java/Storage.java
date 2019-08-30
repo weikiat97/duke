@@ -50,7 +50,7 @@ public class Storage {
                     currentList.add(deadline);
                     break;
                 case "E":
-                    Event event = new Event(input[2], input[3]);
+                    Event event = new Event(input[2], input[3], input[4]);
                     if (Integer.valueOf(input[1]) == 1) {
                         event.isDone();
                     }

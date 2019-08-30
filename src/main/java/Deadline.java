@@ -42,6 +42,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + sdf.format(date) + ")";
+        return "[D]" + super.toString() + " (by: " + sdf.format(date) + ")";
     }
 }

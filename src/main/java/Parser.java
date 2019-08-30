@@ -26,7 +26,8 @@ public class Parser {
         case "event":
             int cutoff = 0;
             String task = "";
-            String time = "";
+            String startTime = "";
+            String endTime = "";
             for (int j = 1; j < myArray.length; j++) {
                 if (myArray[j].charAt(0) == '/') {
                     cutoff = j;
@@ -40,12 +41,15 @@ public class Parser {
                 }
             }
             for (int k = cutoff + 1; k < myArray.length; k++) {
-                if (k != cutoff + 1) {
-                    time += " ";
+                if (myArray[k].equals("to")) {
+                    endTime += myArray[k + 1];
+                    break;
+                } else if (k != cutoff + 1) {
+                    startTime += " ";
                 }
-                time += myArray[k];
+                    startTime += myArray[k];
             }
-            return new AddCommand(new Event(task, time));
+            return new AddCommand(new Event(task, startTime, endTime));
         case "deadline":
             int cutoff2 = 0;
             String task2 = "";

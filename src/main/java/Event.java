@@ -8,26 +8,30 @@ import java.util.Date;
 public class Event extends Task {
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    protected Date date;
+    SimpleDateFormat sdfEndTime = new SimpleDateFormat("HHmm");
+    protected Date dateAndStartTime;
+    protected Date dateAndEndTime;
 
     /**
      * Constructs a new Event task.
      * @param job the Event task to be added to the task list.
-     * @param at the time of the event.
+     * @param startTime the date and start time of the event.
+     * @param endTime the end time of the event.
      * @throws DukeException if the description or the date and time of the event is empty.
      */
-    public Event(String job, String at) throws DukeException {
+    public Event(String job, String startTime, String endTime) throws DukeException {
         super(job);
         try {
-            this.date = sdf.parse(at);
+            this.dateAndStartTime = sdf.parse(startTime);
+            this.dateAndEndTime = sdfEndTime.parse(endTime);
             if (job.equals("")) {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-            } else if (at.equals("")) {
+            } else if (startTime.equals("") || endTime.equals("")) {
                 throw new DukeException("☹ OOPS!!! The date/time of an event cannot be empty.");
             }
         } catch (ParseException e) {
             throw new DukeException("Error in format! Event must be written in \"(event name) " +
-                    "/at dd/MM/yyyy HHmm\" format");
+                    "/at dd/MM/yyyy HHmm to HHmm\" format");
         }
     }
 
@@ -37,11 +41,13 @@ public class Event extends Task {
      */
     @Override
     public String outputToFile() {
-        return String.format("E | %d | %s | %s", this.status.equals("[✓]") ? 1 : 0, this.job, sdf.format(date));
+        return String.format("E | %d | %s | %s | %s", this.status.equals("[✓]") ? 1 : 0, this.job,
+                sdf.format(dateAndStartTime), sdfEndTime.format(dateAndEndTime));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + sdf.format(date) + ")";
+        return "[E]" + super.toString() + " (at: " + sdf.format(dateAndStartTime) + " to " +
+                sdfEndTime.format(dateAndEndTime) + ")";
     }
 }

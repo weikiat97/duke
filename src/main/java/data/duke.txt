@@ -1,8 +1,6 @@
-E | 0 | lunch | 27/08/2019 1200
-T | 0 | stop procrasting
-T | 1 | do work
-D | 0 | this shit | 28/08/2019 2359
-T | 1 | hello
-E | 0 | eat supper | 28/08/1997 1800
-T | 0 | eat dinner
-T | 0 | eat supper
+T | 0 | hi
+D | 0 | sing | 28/08/1997 1800
+D | 0 | hi | 28/08/1997 1800
+E | 1 | eat | 28/08/1997 1800 | 2000
+D | 0 | shit | 30/08/2019 1800
+E | 0 | hellotesting | 30/08/2019 0800 | 1000
