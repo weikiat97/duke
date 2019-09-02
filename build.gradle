@@ -14,3 +14,8 @@ application {
     // Change this to your main class.
     mainClassName = "Duke"
 }
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
