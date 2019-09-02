@@ -5,7 +5,7 @@ import java.io.IOException;
  */
 public class AddCommand extends Command {
 
-    private Task task;
+    private final Task task;
 
     /**
      * Constructor to set the task to be added.

@@ -10,7 +10,7 @@ public class Parser {
      * @throws DukeException if the command is unknown.
      */
     public static Command parse(String fullCommand) throws DukeException {
-        String myArray[] = fullCommand.split(" ");
+        String[] myArray = fullCommand.split(" ");
         String command = myArray[0];
         switch (command) {
         case "bye":
@@ -25,8 +25,8 @@ public class Parser {
             return new DeleteCommand(taskNumber2);
         case "event":
             int cutoff = 0;
-            String task = "";
-            String startTime = "";
+            StringBuilder task = new StringBuilder();
+            StringBuilder startTime = new StringBuilder();
             String endTime = "";
             for (int j = 1; j < myArray.length; j++) {
                 if (myArray[j].charAt(0) == '/') {
@@ -34,9 +34,9 @@ public class Parser {
                     break;
                 } else {
                     if (j != 1) {
-                        task += " ";
+                        task.append(" ");
                     }
-                    task += myArray[j];
+                    task.append(myArray[j]);
                     cutoff = j;
                 }
             }
@@ -45,43 +45,43 @@ public class Parser {
                     endTime += myArray[k + 1];
                     break;
                 } else if (k != cutoff + 1) {
-                    startTime += " ";
+                    startTime.append(" ");
                 }
-                    startTime += myArray[k];
+                    startTime.append(myArray[k]);
             }
-            return new AddCommand(new Event(task, startTime, endTime));
+            return new AddCommand(new Event(task.toString(), startTime.toString(), endTime));
         case "deadline":
             int cutoff2 = 0;
-            String task2 = "";
-            String time2 = "";
+            StringBuilder task2 = new StringBuilder();
+            StringBuilder time2 = new StringBuilder();
             for (int j = 1; j < myArray.length; j++) {
                 if (myArray[j].charAt(0) == '/') {
                     cutoff2 = j;
                     break;
                 } else {
                     if (j != 1) {
-                        task2 += " ";
+                        task2.append(" ");
                     }
-                    task2 += myArray[j];
+                    task2.append(myArray[j]);
                     cutoff2 = j;
                 }
             }
             for (int k = cutoff2 + 1; k < myArray.length; k++) {
                 if (k != cutoff2 + 1) {
-                    time2 += " ";
+                    time2.append(" ");
                 }
-                time2 += myArray[k];
+                time2.append(myArray[k]);
             }
-            return new AddCommand(new Deadline(task2, time2));
+            return new AddCommand(new Deadline(task2.toString(), time2.toString()));
         case "todo":
-            String task3 = "";
+            StringBuilder task3 = new StringBuilder();
             for (int j = 1; j < myArray.length; j++) {
                 if (j != 1) {
-                    task3 += " ";
+                    task3.append(" ");
                 }
-                task3 += myArray[j];
+                task3.append(myArray[j]);
             }
-            return new AddCommand(new ToDo(task3));
+            return new AddCommand(new ToDo(task3.toString()));
         case "find":
             String keyword = myArray[1];
             return new FindCommand(keyword);

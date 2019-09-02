@@ -3,9 +3,9 @@
  */
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Initialises a new Duke session
@@ -45,7 +45,7 @@ public class Duke {
 
     /**
      * Main method to initialise a Duke session.
-     * @param args
+     * @param args main method
      */
     public static void main(String[] args) {
         new Duke("./duke/src/main/java/data/duke.txt").run();

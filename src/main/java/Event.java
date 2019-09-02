@@ -7,10 +7,10 @@ import java.util.Date;
  */
 public class Event extends Task {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    SimpleDateFormat sdfEndTime = new SimpleDateFormat("HHmm");
-    protected Date dateAndStartTime;
-    protected Date dateAndEndTime;
+    private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private final SimpleDateFormat sdfEndTime = new SimpleDateFormat("HHmm");
+    private Date dateAndStartTime;
+    private Date dateAndEndTime;
 
     /**
      * Constructs a new Event task.

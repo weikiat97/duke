@@ -3,7 +3,7 @@
  */
 public class Task {
 
-    protected String job;
+    protected final String job;
     protected String status;
 
     /**

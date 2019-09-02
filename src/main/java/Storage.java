@@ -9,13 +9,11 @@ import java.io.FileNotFoundException;
  */
 public class Storage {
 
-    private String path;
-    private File f;
-    private Scanner s;
+    private final String path;
 
     /**
      * Constructor to make a new storage with the txt file.
-     * @param path
+     * @param path file path to access from.
      */
     public Storage(String path) {
         this.path = path;
@@ -28,6 +26,8 @@ public class Storage {
      */
     public TaskList readFile() throws DukeException {
         TaskList currentList = new TaskList();
+        File f;
+        Scanner s;
         try {
             System.out.println(path);
             f = new File(path);

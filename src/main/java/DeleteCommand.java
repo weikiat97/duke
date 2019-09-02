@@ -5,7 +5,7 @@ import java.io.IOException;
  */
 public class DeleteCommand extends Command {
 
-    private int taskNumber;
+    private final int taskNumber;
 
     /**
      * Constructor to see which task to delete from task list.
