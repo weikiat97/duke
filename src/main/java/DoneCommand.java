@@ -21,14 +21,17 @@ public class DoneCommand extends Command {
      * @param ui Ui to deal with interactions with the user.
      * @param storage Storage to save tasks in the file after execution.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task currentTask = tasks.get(taskNumber - 1);
             currentTask.isDone();
             ui.printDoneTaskMessage(currentTask);
             storage.writeFile(tasks);
+            return "     Nice! I've marked this task as done:\n       " + currentTask;
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            return "Error writing tasks to file!";
+        } catch (IndexOutOfBoundsException e) {
+            return "Index must be between 1 and " + tasks.size();
         }
     }
 }

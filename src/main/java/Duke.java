@@ -17,6 +17,7 @@ public class Duke extends Application {
     public Duke() {
         ui = new Ui();
         storage = new Storage("./src/main/java/data/duke.txt");
+        ui.printWelcomeMessage();
         try {
             tasks = storage.readFile();
         } catch (DukeException e) {
@@ -30,27 +31,11 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
-
-    /**
-     * Runs the programme.
-     */
-    public void run() {
-        ui.printWelcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return "Unknown command! Please try again.";
         }
     }
 

@@ -21,14 +21,15 @@ public class AddCommand extends Command {
      * @param ui Ui to deal with interactions with the user.
      * @param storage Storage to save tasks in the file after execution.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.add(task);
-            ui.printAddEventMessage(task);
-            ui.printNumberOfTasksMessage(tasks);
+            String eventMessage = "     Got it. I've added this task:\n       " + task;
+            String numberOfTaskMessage = "     Now you have " + tasks.size() + " tasks in the list.";
             storage.writeFile(tasks);
+            return eventMessage + "\n" + numberOfTaskMessage;
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            return "Error writing tasks to file!";
         }
     }
 }

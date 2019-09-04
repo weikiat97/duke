@@ -7,7 +7,6 @@ public class ExitCommand extends Command {
      * Constructor that sets the boolean exit to be true. Stops the programme after this.
      */
     public ExitCommand() {
-        exit = true;
     }
 
     /**
@@ -16,7 +15,7 @@ public class ExitCommand extends Command {
      * @param ui Ui to deal with interactions with the user.
      * @param storage Storage to save tasks in the file after execution.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printByeMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "     Bye. Hope to see you again soon!";
     }
 }

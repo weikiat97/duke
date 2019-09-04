@@ -15,7 +15,14 @@ public class ListCommand extends Command {
      * @param ui Ui to deal with interactions with the user.
      * @param storage Storage to save tasks in the file after execution.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printTaskListMessage(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        StringBuilder output = new StringBuilder("");
+        for (int i = 1; i < tasks.size() + 1; i++) {
+            output.append(i + "." + tasks.get(i - 1));
+            if (i != tasks.size()) {
+                output.append("\n");
+            }
+        }
+        return output.toString();
     }
 }

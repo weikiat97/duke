@@ -21,25 +21,26 @@ public class FindCommand extends Command {
      * @param ui Ui to deal with interactions with the user.
      * @param storage Storage to save tasks in the file after execution.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int counter = 1;
-            ui.printFindMessage();
+            String findMessage = "     Here are the matching tasks in your list:";
             for (int i = 0; i < tasks.size(); i++) {
                 Task currentTask = tasks.get(i);
                 String currentJob = currentTask.getJob();
                 String[] findingKeyword = currentJob.split(" ");
                 for (String s : findingKeyword) {
                     if (s.equals(keyword)) {
-                        ui.printFoundMessage(counter, currentTask);
+                        findMessage += "\n     " + counter + "." + currentTask;
                         counter++;
                         break;
                     }
                 }
             }
             storage.writeFile(tasks);
+            return findMessage;
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            return "Error writing tasks to file!";
         }
     }
 }

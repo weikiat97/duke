@@ -21,14 +21,17 @@ public class DeleteCommand extends Command {
      * @param ui Ui to deal with interactions with the user.
      * @param storage Storage to save tasks in the file after execution.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task currentTask = tasks.delete(taskNumber - 1);
-            ui.printDeleteTaskMessage(currentTask);
-            ui.printNumberOfTasksMessage(tasks);
+            String deleteMessage = "     Noted. I've removed this task:\n       " + currentTask;
+            String numberOfTaskMessage = "     Now you have " + tasks.size() + " tasks in the list.";
             storage.writeFile(tasks);
+            return deleteMessage + "\n" + numberOfTaskMessage;
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            return "Error writing tasks to file!";
+        } catch (IndexOutOfBoundsException e) {
+            return "Index must be between 1 and " + tasks.size();
         }
     }
 }

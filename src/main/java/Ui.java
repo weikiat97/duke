@@ -16,33 +16,11 @@ public class Ui {
     }
 
     /**
-     * Shows the divider line.
-     */
-    public void showLine() {
-        System.out.println("    ____________________________________________________________");
-    }
-
-    /**
      * Prints the welcome message on startup.
      */
     public void printWelcomeMessage () {
         System.out.println("     Hello! I'm Duke");
         System.out.println("     What can I do for you?");
-    }
-
-    /**
-     * Reads the command by user.
-     * @return String of command by user.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Prints the bye message when users input "bye".
-     */
-    public void printByeMessage() {
-        System.out.println("     Bye. Hope to see you again soon!");
     }
 
     /**
