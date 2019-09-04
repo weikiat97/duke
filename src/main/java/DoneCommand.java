@@ -18,20 +18,18 @@ public class DoneCommand extends Command {
     /**
      * Executes the done command.
      * @param tasks TaskList of all the current tasks.
-     * @param ui Ui to deal with interactions with the user.
      * @param storage Storage to save tasks in the file after execution.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             Task currentTask = tasks.get(taskNumber - 1);
             currentTask.isDone();
-            ui.printDoneTaskMessage(currentTask);
             storage.writeFile(tasks);
-            return "     Nice! I've marked this task as done:\n       " + currentTask;
+            return "Nice! I've marked this task as done:\n       " + currentTask;
         } catch (IOException e) {
             return "Error writing tasks to file!";
-        } catch (IndexOutOfBoundsException e) {
-            return "Index must be between 1 and " + tasks.size();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Error! Index must be between 1 and " + tasks.size() + "!";
         }
     }
 }

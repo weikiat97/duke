@@ -12,10 +12,9 @@ public class ListCommand extends Command {
     /**
      * Executes the list command.
      * @param tasks TaskList of all the current tasks.
-     * @param ui Ui to deal with interactions with the user.
      * @param storage Storage to save tasks in the file after execution.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         StringBuilder output = new StringBuilder("");
         for (int i = 1; i < tasks.size() + 1; i++) {
             output.append(i + "." + tasks.get(i - 1));

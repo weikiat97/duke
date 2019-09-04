@@ -8,20 +8,16 @@ public class Duke extends Application {
 
     private final Storage storage;
     private TaskList tasks;
-    private final Ui ui;
 
     /**
      * Duke with empty constructor.
      */
 
     public Duke() {
-        ui = new Ui();
         storage = new Storage("./src/main/java/data/duke.txt");
-        ui.printWelcomeMessage();
         try {
             tasks = storage.readFile();
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -33,9 +29,9 @@ public class Duke extends Application {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, storage);
         } catch (DukeException e) {
-            return "Unknown command! Please try again.";
+            return e.getMessage();
         }
     }
 

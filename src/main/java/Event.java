@@ -25,9 +25,9 @@ public class Event extends Task {
             this.dateAndStartTime = sdf.parse(startTime);
             this.dateAndEndTime = sdfEndTime.parse(endTime);
             if (job.equals("")) {
-                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                throw new DukeException("The description of an event cannot be empty! Please try again.");
             } else if (startTime.equals("") || endTime.equals("")) {
-                throw new DukeException("☹ OOPS!!! The date/time of an event cannot be empty.");
+                throw new DukeException("The date/time of an event cannot be empty! Please try again.");
             }
         } catch (ParseException e) {
             throw new DukeException("Error in format! Event must be written in \"(event name) " +

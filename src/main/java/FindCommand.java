@@ -18,13 +18,12 @@ public class FindCommand extends Command {
     /**
      * Executes the find command.
      * @param tasks TaskList of all the current tasks.
-     * @param ui Ui to deal with interactions with the user.
      * @param storage Storage to save tasks in the file after execution.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             int counter = 1;
-            String findMessage = "     Here are the matching tasks in your list:";
+            String findMessage = "Here are the matching tasks in your list:";
             for (int i = 0; i < tasks.size(); i++) {
                 Task currentTask = tasks.get(i);
                 String currentJob = currentTask.getJob();
@@ -41,6 +40,8 @@ public class FindCommand extends Command {
             return findMessage;
         } catch (IOException e) {
             return "Error writing tasks to file!";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Error! Index must be between 1 and " + tasks.size() + "!";
         }
     }
 }

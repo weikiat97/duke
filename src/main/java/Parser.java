@@ -81,12 +81,14 @@ public class Parser {
                 }
                 task3.append(myArray[j]);
             }
+
             return new AddCommand(new ToDo(task3.toString()));
         case "find":
             String keyword = myArray[1];
             return new FindCommand(keyword);
         default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("Invalid command! Please use one of the following commands:\n" +
+                    "list, delete, find, todo, deadline, event, bye");
         }
     }
 }
