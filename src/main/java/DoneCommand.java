@@ -5,7 +5,7 @@ import java.io.IOException;
  */
 public class DoneCommand extends Command {
 
-    private int taskNumber;
+    private final int taskNumber;
 
     /**
      * Constructor to see which task to mark as done from task list.

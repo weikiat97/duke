@@ -7,14 +7,14 @@ import java.util.Date;
  */
 public class Deadline extends Task {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    protected Date date;
+    private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private Date date;
 
     /**
      * Constructs a new Deadline task.
      * @param job the Deadline task to be added to the task list.
      * @param by the time of the deadline.
-     * @throws DukeException
+     * @throws DukeException if there is an error in formatting.
      */
     public Deadline(String job, String by) throws DukeException {
         super(job);

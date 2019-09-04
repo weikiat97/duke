@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
 
     /**
      * All the methods in this class will be just for printing and receiving commands.

@@ -5,7 +5,7 @@ import java.io.IOException;
  */
 public class FindCommand extends Command {
 
-    private String keyword;
+    private final String keyword;
 
     /**
      * Constructor to find keyword.
@@ -29,8 +29,8 @@ public class FindCommand extends Command {
                 Task currentTask = tasks.get(i);
                 String currentJob = currentTask.getJob();
                 String[] findingKeyword = currentJob.split(" ");
-                for (int j = 0; j < findingKeyword.length; j++) {
-                    if (findingKeyword[j].equals(keyword)) {
+                for (String s : findingKeyword) {
+                    if (s.equals(keyword)) {
                         ui.printFoundMessage(counter, currentTask);
                         counter++;
                         break;
