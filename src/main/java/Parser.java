@@ -21,8 +21,12 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "delete":
-            int taskNumber2 = Integer.valueOf(myArray[1]);
-            return new DeleteCommand(taskNumber2);
+            try {
+                int taskNumber2 = Integer.valueOf(myArray[1]);
+                return new DeleteCommand(taskNumber2);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("The task to delete must not be empty! Try again!");
+            }
         case "event":
             int cutoff = 0;
             StringBuilder task = new StringBuilder();
@@ -84,8 +88,12 @@ public class Parser {
 
             return new AddCommand(new ToDo(task3.toString()));
         case "find":
-            String keyword = myArray[1];
-            return new FindCommand(keyword);
+            try {
+                String keyword = myArray[1];
+                return new FindCommand(keyword);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("The keyword must not be empty! Try again!");
+            }
         default:
             throw new DukeException("Invalid command! Please use one of the following commands:\n" +
                     "list, delete, find, todo, deadline, event, bye");

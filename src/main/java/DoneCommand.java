@@ -28,7 +28,7 @@ public class DoneCommand extends Command {
             return "Nice! I've marked this task as done:\n       " + currentTask;
         } catch (IOException e) {
             return "Error writing tasks to file!";
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return "Error! Index must be between 1 and " + tasks.size() + "!";
         }
     }

@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
         } catch (IOException e) {
             return "Error writing tasks to file!";
         } catch (IndexOutOfBoundsException e) {
-            return "Index must be between 1 and " + tasks.size();
+            return "Error! Index must be between 1 and " + tasks.size() + "!";
         }
     }
 }

@@ -23,6 +23,7 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         try {
             int counter = 1;
+            boolean foundKeyword = false;
             String findMessage = "Here are the matching tasks in your list:";
             for (int i = 0; i < tasks.size(); i++) {
                 Task currentTask = tasks.get(i);
@@ -30,6 +31,7 @@ public class FindCommand extends Command {
                 String[] findingKeyword = currentJob.split(" ");
                 for (String s : findingKeyword) {
                     if (s.equals(keyword)) {
+                        foundKeyword = true;
                         findMessage += "\n     " + counter + "." + currentTask;
                         counter++;
                         break;
@@ -37,11 +39,13 @@ public class FindCommand extends Command {
                 }
             }
             storage.writeFile(tasks);
-            return findMessage;
+            if (foundKeyword) {
+                return findMessage;
+            } else {
+                return "There are no matching tasks in your list!";
+            }
         } catch (IOException e) {
             return "Error writing tasks to file!";
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return "Error! Index must be between 1 and " + tasks.size() + "!";
         }
     }
 }
