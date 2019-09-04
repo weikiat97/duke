@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 /**
  * Class to represent the ToDo tasks.
  */

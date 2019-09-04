@@ -1,3 +1,17 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
+import duke.command.AddCommand;
+import duke.command.FindCommand;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.ToDo;
+
+
 /**
  * Class to parse the input by the user into a command.
  */

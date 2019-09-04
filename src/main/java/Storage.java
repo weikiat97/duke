@@ -1,3 +1,6 @@
+package duke;
+
+import duke.task.*;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;

@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.Storage;
 /**
  * Abstract class command that represents all the different possible commands.
  */

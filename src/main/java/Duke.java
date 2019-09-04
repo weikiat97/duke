@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.TaskList;
+import duke.command.Command;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

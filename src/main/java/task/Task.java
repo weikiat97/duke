@@ -1,3 +1,6 @@
+package duke.task;
+
+
 /**
  * Class to represent the task in the task list.
  */
