@@ -7,3 +7,5 @@ T | 0 | hello
 E | 0 | sing karaoke | 24/02/1997 1800 | 1900
 T | 0 | eat
 T | 0 | hello
+T | 0 | hello
+T | 0 | learn
