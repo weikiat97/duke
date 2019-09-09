@@ -1,5 +1,2 @@
 language: java
-java:
- - "stable"
-jdk: oraceljdk8 
 
