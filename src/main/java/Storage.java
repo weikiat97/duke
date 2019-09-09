@@ -27,12 +27,11 @@ public class Storage {
      * @return TaskList which has all the task.
      * @throws DukeException if the task type is different from the expected commands.
      */
-    public TaskList readFile() throws DukeException {
+    public TaskList readFile() throws DukeException, IOException {
         TaskList currentList = new TaskList();
         File f;
         Scanner s;
         try {
-            System.out.println(path);
             f = new File(path);
             s = new Scanner(f);
             while (s.hasNext()) {
@@ -40,23 +39,17 @@ public class Storage {
                 switch (input[0]) {
                 case "T":
                     ToDo toDo = new ToDo(input[2]);
-                    if (Integer.valueOf(input[1]) == 1) {
-                        toDo.isDone();
-                    }
+                    markIfDone(toDo, input[1]);
                     currentList.add(toDo);
                     break;
                 case "D":
                     Deadline deadline = new Deadline(input[2], input[3]);
-                    if (Integer.valueOf(input[1]) == 1) {
-                        deadline.isDone();
-                    }
+                    markIfDone(deadline, input[1]);
                     currentList.add(deadline);
                     break;
                 case "E":
                     Event event = new Event(input[2], input[3], input[4]);
-                    if (Integer.valueOf(input[1]) == 1) {
-                        event.isDone();
-                    }
+                    markIfDone(event, input[1]);
                     currentList.add(event);
                     break;
                 default:
@@ -66,7 +59,20 @@ public class Storage {
             return currentList;
         } catch (FileNotFoundException e) {
             System.out.println("File not found! Making new list now.");
+            f = new File(path);
+            f.createNewFile();
             return currentList;
+        }
+    }
+
+    /**
+     * Checks if the task from the txt file is completed or not. Marks as done if they are.
+     * @param task Task to check if it is done.
+     * @param input Input 0 means undone, input 1 means done.
+     */
+    private void markIfDone(Task task, String input) {
+        if (Integer.parseInt(input) == 1) {
+            task.isDone();
         }
     }
 

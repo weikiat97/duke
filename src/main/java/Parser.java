@@ -10,6 +10,7 @@ import duke.command.FindCommand;
 import duke.task.Event;
 import duke.task.Deadline;
 import duke.task.ToDo;
+import java.util.ArrayList;
 
 
 /**
@@ -26,81 +27,27 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String[] myArray = fullCommand.split(" ");
         String command = myArray[0];
+        ArrayList<String> returnCommand;
         switch (command) {
         case "bye":
             return new ExitCommand();
         case "done":
-            int taskNumber = Integer.valueOf(myArray[1]);
+            int taskNumber = Integer.parseInt(myArray[1]);
             return new DoneCommand(taskNumber);
         case "list":
             return new ListCommand();
         case "delete":
-            try {
-                int taskNumber2 = Integer.valueOf(myArray[1]);
-                return new DeleteCommand(taskNumber2);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("The task to delete must not be empty! Try again!");
-            }
+            int taskNumber2 = Integer.parseInt(myArray[1]);
+            return new DeleteCommand(taskNumber2);
         case "event":
-            int cutoff = 0;
-            StringBuilder task = new StringBuilder();
-            StringBuilder startTime = new StringBuilder();
-            String endTime = "";
-            for (int j = 1; j < myArray.length; j++) {
-                if (myArray[j].charAt(0) == '/') {
-                    cutoff = j;
-                    break;
-                } else {
-                    if (j != 1) {
-                        task.append(" ");
-                    }
-                    task.append(myArray[j]);
-                    cutoff = j;
-                }
-            }
-            for (int k = cutoff + 1; k < myArray.length; k++) {
-                if (myArray[k].equals("to")) {
-                    endTime += myArray[k + 1];
-                    break;
-                } else if (k != cutoff + 1) {
-                    startTime.append(" ");
-                }
-                    startTime.append(myArray[k]);
-            }
-            return new AddCommand(new Event(task.toString(), startTime.toString(), endTime));
+            returnCommand = getTask(myArray, "/at", false);
+            return new AddCommand(new Event(returnCommand.get(0), returnCommand.get(1), returnCommand.get(2)));
         case "deadline":
-            int cutoff2 = 0;
-            StringBuilder task2 = new StringBuilder();
-            StringBuilder time2 = new StringBuilder();
-            for (int j = 1; j < myArray.length; j++) {
-                if (myArray[j].charAt(0) == '/') {
-                    cutoff2 = j;
-                    break;
-                } else {
-                    if (j != 1) {
-                        task2.append(" ");
-                    }
-                    task2.append(myArray[j]);
-                    cutoff2 = j;
-                }
-            }
-            for (int k = cutoff2 + 1; k < myArray.length; k++) {
-                if (k != cutoff2 + 1) {
-                    time2.append(" ");
-                }
-                time2.append(myArray[k]);
-            }
-            return new AddCommand(new Deadline(task2.toString(), time2.toString()));
+            returnCommand = getTask(myArray, "/by", false );
+            return new AddCommand(new Deadline(returnCommand.get(0), returnCommand.get(1)));
         case "todo":
-            StringBuilder task3 = new StringBuilder();
-            for (int j = 1; j < myArray.length; j++) {
-                if (j != 1) {
-                    task3.append(" ");
-                }
-                task3.append(myArray[j]);
-            }
-
-            return new AddCommand(new ToDo(task3.toString()));
+            returnCommand = getTask(myArray, "any word", true);
+            return new AddCommand(new ToDo(returnCommand.get(0)));
         case "find":
             try {
                 String keyword = myArray[1];
@@ -112,5 +59,44 @@ public class Parser {
             throw new DukeException("Invalid command! Please use one of the following commands:\n" +
                     "list, delete, find, todo, deadline, event, bye");
         }
+    }
+
+    /**
+     * Handles the parsing for tasks.
+     * @param inputCommand commands from the user in String[] format.
+     * @param stopAt either '/at' or '/by' depending on which event.
+     * @return an array list of the instructions in task, start time, end time format.
+     */
+    private static ArrayList<String> getTask(String[] inputCommand, String stopAt, boolean isToDo) {
+        ArrayList<String> returnCommand = new ArrayList<String>();
+        StringBuilder task = new StringBuilder();
+        StringBuilder startTime = new StringBuilder();
+        StringBuilder endTime = new StringBuilder();
+        int cutoff = 0;
+        for (int j = 1; j < inputCommand.length; j++) {
+            if (!isToDo && inputCommand[j].equals(stopAt)) {
+                cutoff = j;
+                break;
+            } else {
+                if (j != 1) {
+                    task.append(" ");
+                }
+                task.append(inputCommand[j]);
+                cutoff = j;
+            }
+        }
+        for (int k = cutoff + 1; k < inputCommand.length; k++) {
+            if (inputCommand[k].equals("to")) {
+                endTime.append(inputCommand[k + 1]);
+                break;
+            } else if (k != cutoff + 1) {
+                startTime.append(" ");
+            }
+            startTime.append(inputCommand[k]);
+        }
+        returnCommand.add(task.toString());
+        returnCommand.add(startTime.toString());
+        returnCommand.add(endTime.toString());
+        return returnCommand;
     }
 }
