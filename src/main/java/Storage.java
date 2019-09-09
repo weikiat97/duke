@@ -20,6 +20,7 @@ public class Storage {
      */
     public Storage(String path) {
         this.path = path;
+        assert this.path != null : "The address path must not be empty!";
     }
 
     /**
@@ -35,8 +36,14 @@ public class Storage {
             System.out.println(path);
             f = new File(path);
             s = new Scanner(f);
+            assert f.canRead();
+            assert f.canWrite();
+
             while (s.hasNext()) {
                 String[] input = s.nextLine().split(" \\| ");
+                assert input.length >= 3 : "Inputs from file has an error!";
+                assert Integer.valueOf(input[1]) == 1 ||
+                        Integer.valueOf(input[1]) == 0 : "Inputs from file has an error!";
                 switch (input[0]) {
                 case "T":
                     ToDo toDo = new ToDo(input[2]);
