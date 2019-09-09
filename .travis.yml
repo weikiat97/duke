@@ -1,5 +1,5 @@
 language: java
 java:
  - "stable"
-script: gulp travis
+jdk: oraceljdk8 
 
