@@ -5,6 +5,8 @@ import duke.command.Command;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 /**
  * Main class duke to start the programme.
  */
@@ -18,10 +20,10 @@ public class Duke extends Application {
      */
 
     public Duke() {
-        storage = new Storage("./src/main/java/data/duke.txt");
+        storage = new Storage("./src/main/java/duke/data/duke.txt");
         try {
             tasks = storage.readFile();
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             tasks = new TaskList();
         }
     }
