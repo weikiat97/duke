@@ -18,8 +18,8 @@ public class Duke extends Application {
     /**
      * Duke with empty constructor.
      */
-
-    Duke() {
+    
+    public Duke() {
         storage = new Storage("./src/main/java/duke/data/duke.txt");
         try {
             tasks = storage.readFile();
