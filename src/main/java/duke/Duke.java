@@ -5,6 +5,8 @@ import duke.command.Command;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 /**
  * Main class duke to start the programme.
  */
@@ -17,11 +19,11 @@ public class Duke extends Application {
      * Duke with empty constructor.
      */
 
-    public Duke() {
-        storage = new Storage("./src/main/java/data/duke.txt");
+    Duke() {
+        storage = new Storage("./src/main/java/duke/data/duke.txt");
         try {
             tasks = storage.readFile();
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             tasks = new TaskList();
         }
     }
@@ -30,7 +32,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
+    String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, storage);
