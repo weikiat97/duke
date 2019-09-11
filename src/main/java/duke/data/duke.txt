@@ -1,4 +1,1 @@
-E | 0 | eat | 19/08/1889 1800 | 1900
-E | 0 | eatfood | every Tuesday 1800 | 1950
-D | 0 | eat | 18/08/3889 1800
-D | 1 | eat lololol | every Tuesday 1800
+T | 0 | hello

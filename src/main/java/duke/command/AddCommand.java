@@ -29,7 +29,8 @@ public class AddCommand extends Command {
         try {
             tasks.add(task);
             String eventMessage = "Got it. I've added this task:\n       " + task;
-            String numberOfTaskMessage = "Now you have " + tasks.size() + " tasks in the list.";
+            String numberOfTaskMessage = String.format("Now you have %d %s in the list.", tasks.size(),
+                    tasks.size() > 1 ? "tasks" : "task");
             storage.writeFile(tasks);
             return eventMessage + "\n" + numberOfTaskMessage;
         } catch (IOException e) {
