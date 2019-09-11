@@ -11,9 +11,13 @@ import java.util.Date;
 public class Event extends Task {
 
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    private final SimpleDateFormat sdfEndTime = new SimpleDateFormat("HHmm");
+    private final SimpleDateFormat sdfTime = new SimpleDateFormat("HHmm");
+    private String weekly;
+    private Date weeklyStartTime;
+    private Date weeklyEndTime;
     private Date dateAndStartTime;
     private Date dateAndEndTime;
+    private boolean isEveryWeek;
 
     /**
      * Constructs a new Event task.
@@ -35,12 +39,29 @@ public class Event extends Task {
 
     private void checkFormat(String startTime, String endTime) throws DukeException {
         try {
-            this.dateAndStartTime = sdf.parse(startTime);
-            this.dateAndEndTime = sdfEndTime.parse(endTime);
+            String[] splitBy = startTime.split(" ");
             if (job.equals("")) {
                 throw new DukeException("The description of an event cannot be empty! Please try again.");
             } else if (startTime.equals("") || endTime.equals("")) {
                 throw new DukeException("The date/time of an event cannot be empty! Please try again.");
+            } else if (splitBy[0].equals("every")) {
+                isEveryWeek = true;
+                StringBuilder output = new StringBuilder();
+                for (int i = 1; i < splitBy.length - 1; i++) {
+                    if (i != 1) {
+                        output.append(" ");
+                    }
+                    output.append(splitBy[i]);
+                    if (i == splitBy.length - 2) {
+                        this.weeklyStartTime = sdfTime.parse(splitBy[splitBy.length - 1]);
+                        break;
+                    }
+                }
+                this.weekly = output.toString();
+                this.weeklyEndTime = sdfTime.parse(endTime);
+            } else {
+                this.dateAndStartTime = sdf.parse(startTime);
+                this.dateAndEndTime = sdfTime.parse(endTime);
             }
         } catch (ParseException e) {
             throw new DukeException("Error in format! Event must be written in \"(event name) " +
@@ -53,13 +74,23 @@ public class Event extends Task {
      */
     @Override
     public String outputToFile() {
-        return String.format("E | %d | %s | %s | %s", this.status.equals("[✓]") ? 1 : 0, this.job,
-                sdf.format(dateAndStartTime), sdfEndTime.format(dateAndEndTime));
+        if (!isEveryWeek) {
+            return String.format("E | %d | %s | %s | %s", this.status.equals("[✓]") ? 1 : 0, this.job,
+                    sdf.format(dateAndStartTime), sdfTime.format(dateAndEndTime));
+        } else {
+            return String.format("E | %d | %s | every %s %s | %s", this.status.equals("[✓]") ? 1 : 0, this.job,
+                    this.weekly, sdfTime.format(weeklyStartTime), sdfTime.format(weeklyEndTime));
+        }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + sdf.format(dateAndStartTime) + " to " +
-                sdfEndTime.format(dateAndEndTime) + ")";
+        if (!isEveryWeek) {
+            return String.format("[E]%s (at: %s to %s)", super.toString(), sdf.format(dateAndStartTime),
+                    sdfTime.format(dateAndEndTime));
+        } else {
+            return String.format("[E]%s (at: every %s %s to %s)", super.toString(), weekly,
+                    sdfTime.format(weeklyStartTime), sdfTime.format(weeklyEndTime));
+        }
     }
 }

@@ -129,13 +129,24 @@ public class Parser {
             }
         }
         for (int k = cutoff + 1; k < inputCommand.length; k++) {
-            if (inputCommand[k].equals("to")) {
+            if (inputCommand[cutoff + 1].equals("every")) {
+                if (inputCommand[k].equals("to")) {
+                    endTime.append(inputCommand[k + 1]);
+                    break;
+                }
+                if (k != cutoff + 1) {
+                    startTime.append(" ");
+                }
+                startTime.append(inputCommand[k]);
+            } else if (inputCommand[k].equals("to")) {
                 endTime.append(inputCommand[k + 1]);
                 break;
-            } else if (k != cutoff + 1) {
-                startTime.append(" ");
+            } else {
+                if (k != cutoff + 1) {
+                    startTime.append(" ");
+                }
+                startTime.append(inputCommand[k]);
             }
-            startTime.append(inputCommand[k]);
         }
         returnCommand.add(task.toString());
         returnCommand.add(startTime.toString());

@@ -13,6 +13,8 @@ public class Deadline extends Task {
 
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
     private Date date;
+    private String weekly;
+    private boolean isEveryWeek;
 
     /**
      * Constructs a new Deadline task.
@@ -33,15 +35,32 @@ public class Deadline extends Task {
 
     private void checkFormat(String by) throws DukeException {
         try {
-            this.date = sdf.parse(by);
+            String[] splitBy = by.split(" ");
             if (job.equals("")) {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
             } else if (by.equals("")) {
                 throw new DukeException("☹ OOPS!!! The date/time of a deadline cannot be empty.");
+            } else if (splitBy[0].equals("every")) {
+                isEveryWeek = true;
+                StringBuilder output = new StringBuilder();
+                for (int i = 1; i < splitBy.length; i++) {
+                    if (i != 1) {
+                        output.append(" ");
+                    }
+                    output.append(splitBy[i]);
+                }
+                this.weekly = output.toString();
+            } else {
+                this.date = sdf.parse(by);
             }
         } catch (ParseException e) {
-            throw new DukeException("Error in format! Deadline must be written in \"(deadline name) " +
-                    "/at dd/MM/yyyy HHmm\" format");
+            if (isEveryWeek) {
+                throw new DukeException("Error in format! Recurring deadline must be written in \"(deadline name) " +
+                        "/by every (recurring day)\" format");
+            } else {
+                throw new DukeException("Error in format! Deadline must be written in \"(deadline name) " +
+                        "/by dd/MM/yyyy HHmm\" format");
+            }
         }
     }
 
@@ -51,11 +70,19 @@ public class Deadline extends Task {
      */
     @Override
     public String outputToFile() {
-        return String.format("D | %d | %s | %s", this.status.equals("[✓]") ? 1 : 0, this.job, sdf.format(date));
+        if (!isEveryWeek) {
+            return String.format("D | %d | %s | %s", this.status.equals("[✓]") ? 1 : 0, this.job, sdf.format(date));
+        } else {
+            return String.format("D | %d | %s | every %s", this.status.equals("[✓]") ? 1 : 0, this.job, weekly);
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + sdf.format(date) + ")";
+        if (!isEveryWeek) {
+            return String.format("[D]%s (by: every %s)", super.toString(), sdf.format(date));
+        } else {
+            return String.format("[D]%s (by: every %s)", super.toString(), weekly);
+        }
     }
 }

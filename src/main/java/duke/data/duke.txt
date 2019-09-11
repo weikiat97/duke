@@ -1,7 +1,4 @@
-E | 0 | eat | 02/12/1998 1800 | 2100
-T | 0 | bitch
-T | 0 | god
-T | 0 | wow
-T | 0 | hi
-T | 0 | eat
-D | 0 | homework | 23/09/2019 1100
+E | 0 | eat | 19/08/1889 1800 | 1900
+E | 0 | eatfood | every Tuesday 1800 | 1950
+D | 0 | eat | 18/08/3889 1800
+D | 1 | eat lololol | every Tuesday 1800
