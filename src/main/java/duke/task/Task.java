@@ -1,13 +1,16 @@
 package duke.task;
 
 
+import duke.DukeException;
+
 /**
  * Class to represent the task in the task list.
  */
 public class Task {
 
-    protected final String job;
+    protected String job;
     protected String status;
+    protected String taskType;
 
     /**
      * Constructs a new task.
@@ -16,7 +19,20 @@ public class Task {
     public Task(String job) {
         this.job = job;
         this.status = "[✗]";
+        taskType = "";
     }
+
+    protected void changeType(String taskType) {
+        this.taskType = taskType;
+    }
+
+    public String getType() {
+        return this.taskType;
+    }
+
+    public void snooze(String date) throws DukeException {};
+
+    public void snooze(String startTime, String endTime) throws DukeException {};
 
     /**
      * Changes the status of the task to done.

@@ -1,7 +1,7 @@
 package duke.task;
 
 import duke.DukeException;
-import duke.task.Task;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,6 +22,16 @@ public class Deadline extends Task {
      */
     public Deadline(String job, String by) throws DukeException {
         super(job);
+        checkFormat(by);
+        changeType("Deadline");
+    }
+
+    @Override
+    public void snooze(String newBy) throws DukeException {
+        checkFormat(newBy);
+    }
+
+    private void checkFormat(String by) throws DukeException {
         try {
             this.date = sdf.parse(by);
             if (job.equals("")) {

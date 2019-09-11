@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
-import duke.command.AddCommand;
-import duke.command.FindCommand;
+import duke.command.*;
 import duke.task.Event;
 import duke.task.Deadline;
 import duke.task.ToDo;
@@ -32,13 +26,21 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "done":
-            int taskNumber = Integer.parseInt(myArray[1]);
-            return new DoneCommand(taskNumber);
+            try {
+                int taskNumber = Integer.parseInt(myArray[1]);
+                return new DoneCommand(taskNumber);
+            } catch (NumberFormatException e) {
+                throw new NumberFormatException("Error! Please enter a valid integer!");
+            }
         case "list":
             return new ListCommand();
         case "delete":
-            int taskNumber2 = Integer.parseInt(myArray[1]);
-            return new DeleteCommand(taskNumber2);
+            try {
+                int taskNumber2 = Integer.parseInt(myArray[1]);
+                return new DeleteCommand(taskNumber2);
+            } catch (NumberFormatException e) {
+                throw new NumberFormatException("Error! Please enter a valid integer!");
+            }
         case "event":
             returnCommand = getTask(myArray, "/at", false);
             return new AddCommand(new Event(returnCommand.get(0), returnCommand.get(1), returnCommand.get(2)));
@@ -48,6 +50,14 @@ public class Parser {
         case "todo":
             returnCommand = getTask(myArray, "any word", true);
             return new AddCommand(new ToDo(returnCommand.get(0)));
+        case "postpone":
+            try {
+                int taskNumber3 = Integer.parseInt(myArray[1]);
+                returnCommand = postponeTask(myArray);
+                return new PostponeCommand(taskNumber3, returnCommand);
+            } catch (NumberFormatException e) {
+                throw new NumberFormatException("Error! Please enter a valid integer!");
+            }
         case "find":
             try {
                 String keyword = myArray[1];
@@ -59,6 +69,39 @@ public class Parser {
             throw new DukeException("Invalid command! Please use one of the following commands:\n" +
                     "list, delete, find, todo, deadline, event, bye");
         }
+    }
+
+    /**
+     * Handles the parsing for postponing of tasks.
+     * @param inputCommand commands from the user in String[] format
+     * @return an array list of the start time and end time.
+     */
+    private static ArrayList<String> postponeTask(String[] inputCommand) {
+        ArrayList<String> returnCommand = new ArrayList<String>();
+        StringBuilder startTime = new StringBuilder();
+        StringBuilder endTime = new StringBuilder();
+        int cutoff = 2;
+        for (int j = 2; j < inputCommand.length; j++) {
+            if (inputCommand[j].equals("to")) {
+                cutoff = j;
+                break;
+            } else {
+                if (j != 1) {
+                    startTime.append(" ");
+                }
+                startTime.append(inputCommand[j]);
+                cutoff = j;
+            }
+        }
+        for (int k = cutoff + 1; k < inputCommand.length; k++) {
+            if (k != cutoff + 1) {
+                endTime.append(" ");
+            }
+            endTime.append(inputCommand[k]);
+        }
+        returnCommand.add(startTime.toString());
+        returnCommand.add(endTime.toString());
+        return returnCommand;
     }
 
     /**

@@ -24,6 +24,16 @@ public class Event extends Task {
      */
     public Event(String job, String startTime, String endTime) throws DukeException {
         super(job);
+        checkFormat(startTime, endTime);
+        changeType("Event");
+    }
+
+    @Override
+    public void snooze(String newStartTime, String newEndTime) throws DukeException {
+        checkFormat(newStartTime, newEndTime);
+    }
+
+    private void checkFormat(String startTime, String endTime) throws DukeException {
         try {
             this.dateAndStartTime = sdf.parse(startTime);
             this.dateAndEndTime = sdfEndTime.parse(endTime);
@@ -37,7 +47,6 @@ public class Event extends Task {
                     "/at dd/MM/yyyy HHmm to HHmm\" format");
         }
     }
-
     /**
      * Formats the Event task to be added to the txt file.
      * @return String to be added to the txt file.
