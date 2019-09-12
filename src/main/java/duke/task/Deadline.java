@@ -80,7 +80,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (!isEveryWeek) {
-            return String.format("[D]%s (by: every %s)", super.toString(), sdf.format(date));
+            return String.format("[D]%s (by: %s)", super.toString(), sdf.format(date));
         } else {
             return String.format("[D]%s (by: every %s)", super.toString(), weekly);
         }

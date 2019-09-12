@@ -67,7 +67,7 @@ public class Parser {
             }
         default:
             throw new DukeException("Invalid command! Please use one of the following commands:\n" +
-                    "list, delete, find, todo, deadline, event, bye");
+                    "list, delete, find, todo, deadline, event, postpone, bye");
         }
     }
 
