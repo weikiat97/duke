@@ -52,12 +52,12 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         if (input.equals("bye")) {
             Timer timer = new Timer();
-            TimerTask exitGUI = new TimerTask() {
+            TimerTask exitGui = new TimerTask() {
                 public void run() {
                     System.exit(0);
                 }
             };
-            timer.schedule(exitGUI, 1000);
+            timer.schedule(exitGui, 1000);
         }
     }
 }

@@ -64,10 +64,11 @@ public class Event extends Task {
                 this.dateAndEndTime = sdfTime.parse(endTime);
             }
         } catch (ParseException e) {
-            throw new DukeException("Error in format! Event must be written in \"(event name) " +
-                    "/at dd/MM/yyyy HHmm to HHmm\" format");
+            throw new DukeException("Error in format! Event must be written in \"(event name) "
+                    + "/at dd/MM/yyyy HHmm to HHmm\" format");
         }
     }
+
     /**
      * Formats the Event task to be added to the txt file.
      * @return String to be added to the txt file.

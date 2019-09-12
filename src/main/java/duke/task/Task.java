@@ -30,9 +30,13 @@ public class Task {
         return this.taskType;
     }
 
-    public void snooze(String date) throws DukeException {};
+    public void snooze(String date) throws DukeException {
 
-    public void snooze(String startTime, String endTime) throws DukeException {};
+    }
+
+    public void snooze(String startTime, String endTime) throws DukeException {
+
+    }
 
     /**
      * Changes the status of the task to done.

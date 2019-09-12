@@ -30,7 +30,8 @@ public class DeleteCommand extends Command {
             Task currentTask = tasks.delete(taskNumber - 1);
             String deleteMessage = "     Noted. I've removed this task:\n       " + currentTask;
             String numberOfTaskMessage = String.format("Now you have %d %s in the list.", tasks.size(),
-                    tasks.size() > 1 ? "tasks" : "task");            storage.writeFile(tasks);
+                    tasks.size() > 1 ? "tasks" : "task");
+            storage.writeFile(tasks);
             return deleteMessage + "\n" + numberOfTaskMessage;
         } catch (IOException e) {
             return "Error writing tasks to file!";

@@ -41,6 +41,8 @@ public class Duke extends Application {
     }
 
     @Override
-    public void start (Stage start) {}
+    public void start(Stage start) {
+
+    }
 }
 

@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
 import java.util.ArrayList;
 
 /**
@@ -44,7 +43,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes the task that user is looking for
+     * Deletes the task that user is looking for.
      * @param taskNumber The number of the corresponding task that user is looking for.
      * @return Task that user is looking for.
      * @throws IndexOutOfBoundsException if task number is more than number of items in list or less than 0.

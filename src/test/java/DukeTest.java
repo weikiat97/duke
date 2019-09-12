@@ -1,8 +1,11 @@
 package duke;
 
-import duke.task.*;
 import duke.command.Command;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
@@ -30,8 +33,8 @@ public class DukeTest {
         try {
             Event event = new Event("", "", "");
         } catch (DukeException e) {
-            assertEquals("Error in format! Event must be written in \"(event name) " +
-                    "/at dd/MM/yyyy HHmm to HHmm\" format", e.getMessage());
+            assertEquals("Error in format! Event must be written in \"(event name) "
+                    + "/at dd/MM/yyyy HHmm to HHmm\" format", e.getMessage());
         }
     }
 
@@ -40,8 +43,8 @@ public class DukeTest {
         try {
             Command c = Parser.parse("hello");
         } catch (DukeException e) {
-            assertEquals("Invalid command! Please use one of the following commands:\n" +
-                    "list, delete, find, todo, deadline, event, bye", e.getMessage());
+            assertEquals("Invalid command! Please use one of the following commands:\n"
+                    + "list, delete, find, todo, deadline, event, bye", e.getMessage());
         }
     }
 

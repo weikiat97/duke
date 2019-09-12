@@ -55,11 +55,11 @@ public class Deadline extends Task {
             }
         } catch (ParseException e) {
             if (isEveryWeek) {
-                throw new DukeException("Error in format! Recurring deadline must be written in \"(deadline name) " +
-                        "/by every (recurring day)\" format");
+                throw new DukeException("Error in format! Recurring deadline must be written in \"(deadline name) "
+                        + "/by every (recurring day)\" format");
             } else {
-                throw new DukeException("Error in format! Deadline must be written in \"(deadline name) " +
-                        "/by dd/MM/yyyy HHmm\" format");
+                throw new DukeException("Error in format! Deadline must be written in \"(deadline name) "
+                        + "/by dd/MM/yyyy HHmm\" format");
             }
         }
     }

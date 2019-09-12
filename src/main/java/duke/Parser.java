@@ -1,9 +1,10 @@
 package duke;
 
 import duke.command.*;
-import duke.task.Event;
 import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.ToDo;
+
 import java.util.ArrayList;
 
 
@@ -45,7 +46,7 @@ public class Parser {
             returnCommand = getTask(myArray, "/at", false);
             return new AddCommand(new Event(returnCommand.get(0), returnCommand.get(1), returnCommand.get(2)));
         case "deadline":
-            returnCommand = getTask(myArray, "/by", false );
+            returnCommand = getTask(myArray, "/by", false);
             return new AddCommand(new Deadline(returnCommand.get(0), returnCommand.get(1)));
         case "todo":
             returnCommand = getTask(myArray, "any word", true);
@@ -66,8 +67,8 @@ public class Parser {
                 throw new DukeException("The keyword must not be empty! Try again!");
             }
         default:
-            throw new DukeException("Invalid command! Please use one of the following commands:\n" +
-                    "list, delete, find, todo, deadline, event, postpone, bye");
+            throw new DukeException("Invalid command! Please use one of the following commands:\n"
+                    + "list, delete, find, todo, deadline, event, postpone, bye");
         }
     }
 

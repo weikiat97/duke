@@ -1,11 +1,12 @@
 package duke;
 
 import duke.task.*;
-import java.util.Scanner;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * Storage class to deal with loading tasks from the file and saving tasks in the file.
@@ -41,8 +42,8 @@ public class Storage {
             while (s.hasNext()) {
                 String[] input = s.nextLine().split(" \\| ");
                 assert input.length >= 3 : "Inputs from file has an error!";
-                assert Integer.valueOf(input[1]) == 1 ||
-                        Integer.valueOf(input[1]) == 0 : "Inputs from file has an error!";
+                assert Integer.valueOf(input[1]) == 1
+                        || Integer.valueOf(input[1]) == 0 : "Inputs from file has an error!";
                 switch (input[0]) {
                 case "T":
                     ToDo toDo = new ToDo(input[2]);
