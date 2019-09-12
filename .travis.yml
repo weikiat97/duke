@@ -1,3 +1,8 @@
 language: java
-jdk:
-  - oraclejdk8
+matrix:
+  include:
+    - jdk: openjdk11
+
+script: >-
+    ./gradlew clean checkstyleMain checkstyleTest test
+
