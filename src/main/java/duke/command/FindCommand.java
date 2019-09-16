@@ -29,7 +29,7 @@ public class FindCommand extends Command {
         try {
             int counter = 1;
             boolean foundKeyword = false;
-            String findMessage = "Here are the matching tasks in your list:";
+            String findMessage = "Hey boss. Here are the matching tasks in your list:";
             for (int i = 0; i < tasks.size(); i++) {
                 Task currentTask = tasks.get(i);
                 String currentJob = currentTask.getJob();
@@ -47,10 +47,10 @@ public class FindCommand extends Command {
             if (foundKeyword) {
                 return findMessage;
             } else {
-                return "There are no matching tasks in your list!";
+                return "Oh no boss, there are no matching tasks in your list!";
             }
         } catch (IOException e) {
-            return "Error writing tasks to file!";
+            return "Oops! There was an error writing tasks to file! :(";
         }
     }
 }

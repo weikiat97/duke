@@ -28,15 +28,15 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         try {
             Task currentTask = tasks.delete(taskNumber - 1);
-            String deleteMessage = "     Noted. I've removed this task:\n       " + currentTask;
+            String deleteMessage = "Yes boss. I've removed this task:\n       " + currentTask;
             String numberOfTaskMessage = String.format("Now you have %d %s in the list.", tasks.size(),
                     tasks.size() > 1 ? "tasks" : "task");
             storage.writeFile(tasks);
             return deleteMessage + "\n" + numberOfTaskMessage;
         } catch (IOException e) {
-            return "Error writing tasks to file!";
+            return "Oops! There was an error writing tasks to file! :(";
         } catch (IndexOutOfBoundsException e) {
-            return "Error! Index must be between 1 and " + tasks.size() + "!";
+            return "Hmmm, that's not right! Index must be between 1 and " + tasks.size() + "!";
         }
     }
 }

@@ -37,9 +37,11 @@ public class Deadline extends Task {
         try {
             String[] splitBy = by.split(" ");
             if (job.equals("")) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("Hmmm, that's not right! The description of a deadline cannot be empty!"
+                        + "(Format: \"deadline (deadline name) /by dd/MM/yyyy HHmm\")");
             } else if (by.equals("")) {
-                throw new DukeException("☹ OOPS!!! The date/time of a deadline cannot be empty.");
+                throw new DukeException("Hmmm, that's not right! The date/time of a deadline cannot be empty!"
+                        + "(Format: \"deadline (deadline name) /by dd/MM/yyyy HHmm\")");
             } else if (splitBy[0].equals("every")) {
                 isEveryWeek = true;
                 StringBuilder output = new StringBuilder();
@@ -55,11 +57,11 @@ public class Deadline extends Task {
             }
         } catch (ParseException e) {
             if (isEveryWeek) {
-                throw new DukeException("Error in format! Recurring deadline must be written in \"(deadline name) "
-                        + "/by every (recurring day)\" format");
+                throw new DukeException("Hmmm, that's not right! Please try the recurring deadline again! "
+                        + "(Format: \"deadline (deadline name) /by every (recurring day)\")");
             } else {
-                throw new DukeException("Error in format! Deadline must be written in \"(deadline name) "
-                        + "/by dd/MM/yyyy HHmm\" format");
+                throw new DukeException("Hmmm, that's not right! Please try again! " +
+                        "(Format: \"deadline (deadline name) /by dd/MM/yyyy HHmm\")");
             }
         }
     }

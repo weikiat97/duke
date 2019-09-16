@@ -9,7 +9,7 @@ import duke.Storage;
 public class ExitCommand extends Command {
 
     /**
-     * Constructor that sets the boolean exit to be true. Stops the programme after this.
+     * Constructor that stops the programme after this.
      */
     public ExitCommand() {
     }
@@ -20,6 +20,6 @@ public class ExitCommand extends Command {
      * @param storage Storage to save tasks in the file after execution.
      */
     public String execute(TaskList tasks, Storage storage) {
-        return "Bye! Hope to see you again soon!";
+        return "Bye boss! Hope to see you again soon! ^.^";
     }
 }

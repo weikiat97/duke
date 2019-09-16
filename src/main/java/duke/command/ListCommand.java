@@ -28,7 +28,7 @@ public class ListCommand extends Command {
             }
         }
         if (output.toString().equals("")) {
-            return "There is no tasks in the list!";
+            return "Oh no boss, there is no task in the list!";
         } else {
             return output.toString();
         }

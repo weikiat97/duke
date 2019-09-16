@@ -41,9 +41,11 @@ public class Event extends Task {
         try {
             String[] splitBy = startTime.split(" ");
             if (job.equals("")) {
-                throw new DukeException("The description of an event cannot be empty! Please try again.");
+                throw new DukeException("Hmmm, that's not right! The description of an event cannot be empty! "
+                        + "(Format: \"event (event name) /at dd/MM/yyyy HHmm\")");
             } else if (startTime.equals("") || endTime.equals("")) {
-                throw new DukeException("The date/time of an event cannot be empty! Please try again.");
+                throw new DukeException("Hmmm, that's not right! The date/time of an event cannot be empty! "
+                        + "(Format: \"event (event name) /at dd/MM/yyyy HHmm\")");
             } else if (splitBy[0].equals("every")) {
                 isEveryWeek = true;
                 StringBuilder output = new StringBuilder();
@@ -64,8 +66,13 @@ public class Event extends Task {
                 this.dateAndEndTime = sdfTime.parse(endTime);
             }
         } catch (ParseException e) {
-            throw new DukeException("Error in format! Event must be written in \"(event name) "
-                    + "/at dd/MM/yyyy HHmm to HHmm\" format");
+            if (isEveryWeek) {
+                throw new DukeException("Hmmm, that's not right! Please try the recurring event again! "
+                        + "event (Format: \"(event name) /at every (recurring day)\")");
+            } else {
+                throw new DukeException("Hmmm, that's not right! Please try again! " +
+                        "event (Format: \"(event name) /at dd/MM/yyyy HHmm\")");
+            }
         }
     }
 

@@ -34,20 +34,21 @@ public class PostponeCommand extends Command {
         try {
             Task currentTask = tasks.get(taskNumber - 1);
             if (currentTask.getType().equals("ToDo")) {
-                return ("Current job is ToDo, there is no date to postpone!");
+                return ("Hmmm, that's not right. Current job is ToDo - there is no date to postpone!");
             } else if (currentTask.getType().equals("Deadline")) {
                 currentTask.snooze(returnCommand.get(0));
             } else if (currentTask.getType().equals("Event")) {
                 currentTask.snooze(returnCommand.get(0), returnCommand.get(1));
             }
             storage.writeFile(tasks);
-            return "Alright! I've postponed the timings for this task:\n       " + currentTask;
+            return "Yes boss. I've postponed the timings for this task:\n       " + currentTask;
         } catch (IOException e) {
-            return "Error writing tasks to file!";
+            return "Oops! There was an error writing tasks to file! :(";
         } catch (IndexOutOfBoundsException e) {
-            return "Error! Index must be between 1 and " + tasks.size() + "!";
+            return "Hmmm, that's not right! Index must be between 1 and " + tasks.size() + "!";
         } catch (DukeException e) {
-            return "Error! Format should be postpone (index) (dd/mm/yyyy hhmm)! ";
+            return "Hmmm, that's not right! Please try again with the proper format!"
+                    + " (Format: \"postpone (index) (dd/MM/yyyy HHmm)\")";
         }
     }
 

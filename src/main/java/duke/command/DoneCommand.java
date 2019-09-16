@@ -30,11 +30,12 @@ public class DoneCommand extends Command {
             Task currentTask = tasks.get(taskNumber - 1);
             currentTask.isDone();
             storage.writeFile(tasks);
-            return "Nice! I've marked this task as done:\n       " + currentTask;
+            return "Yes boss. I've marked this task as done:\n       " + currentTask
+                    + "\nGood job boss!";
         } catch (IOException e) {
-            return "Error writing tasks to file!";
+            return "Oops! There was an error writing tasks to file! :(";
         } catch (IndexOutOfBoundsException e) {
-            return "Error! Index must be between 1 and " + tasks.size() + "!";
+            return "Hmmm, that's not right! Index must be between 1 and " + tasks.size() + "!";
         }
     }
 }

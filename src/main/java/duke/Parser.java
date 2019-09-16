@@ -26,12 +26,15 @@ public class Parser {
         switch (command) {
         case "bye":
             return new ExitCommand();
+        case "hello":
+            return new HelloCommand();
         case "done":
             try {
                 int taskNumber = Integer.parseInt(myArray[1]);
                 return new DoneCommand(taskNumber);
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("Error! Please enter a valid integer!");
+                throw new NumberFormatException("Hmmm that's not right, please enter a valid integer to"
+                        + " complete a task! (Format: \"done (integer)\")");
             }
         case "list":
             return new ListCommand();
@@ -40,8 +43,8 @@ public class Parser {
                 int taskNumber2 = Integer.parseInt(myArray[1]);
                 return new DeleteCommand(taskNumber2);
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("Error! Please enter a valid integer!");
-            }
+                throw new NumberFormatException("Hmmm that's not right, please enter a valid integer to"
+                        + " delete a task! (Format: \"delete (integer)\")");            }
         case "event":
             returnCommand = getTask(myArray, "/at", false);
             return new AddCommand(new Event(returnCommand.get(0), returnCommand.get(1), returnCommand.get(2)));
@@ -57,18 +60,19 @@ public class Parser {
                 returnCommand = postponeTask(myArray);
                 return new PostponeCommand(taskNumber3, returnCommand);
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("Error! Please enter a valid integer!");
-            }
+                throw new NumberFormatException("Hmmm that's not right, please enter a valid integer to"
+                        + "postpone a task! (Format: \"postpone (integer) (dd/MM/yyyy HHmm)\")");}
         case "find":
             try {
                 String keyword = myArray[1];
                 return new FindCommand(keyword);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("The keyword must not be empty! Try again!");
+                throw new DukeException("Hmmm that's not right, please enter a keyword to find!"
+                        + " (Format: \"find (keyword)\")");
             }
         default:
-            throw new DukeException("Invalid command! Please use one of the following commands:\n"
-                    + "list, delete, find, todo, deadline, event, postpone, bye");
+            throw new DukeException("I'm sorry, but I don't know what that means! Please use one of the "
+                    + "following instructions:\nhello, list, delete, find, todo, deadline, event, postpone, bye");
         }
     }
 

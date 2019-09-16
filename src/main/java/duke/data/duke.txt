@@ -2,3 +2,10 @@ T | 0 | hello
 T | 0 | eat
 D | 0 | shit | 20/08/2001 2000
 D | 0 | eat | every Tuesday 1800
+T | 0 | hello
+T | 0 | eat
+T | 0 | bye
+T | 0 | hello
+T | 0 | eat
+T | 0 | eat
+T | 0 | eat

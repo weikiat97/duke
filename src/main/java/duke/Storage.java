@@ -61,12 +61,12 @@ public class Storage {
                     currentList.add(event);
                     break;
                 default:
-                    throw new DukeException("Error reading task type.");
+                    throw new DukeException("Error reading task type??!!");
                 }
             }
             return currentList;
         } catch (FileNotFoundException e) {
-            System.out.println("File not found! Making new list now.");
+            System.out.println("File not found! Starting from a new list now!");
             f = new File(path);
             f.createNewFile();
             return currentList;
