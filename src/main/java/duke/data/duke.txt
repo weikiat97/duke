@@ -2,4 +2,4 @@ D | 0 | CS2103 Individual Project | 18/09/2019 2359
 E | 0 | Dinner with Friends | 16/09/2019 1800 | 2000
 T | 1 | Clean Room
 T | 0 | Apply for Exchange
-T | 0 | Buy Dinner
+T | 1 | Buy Dinner
