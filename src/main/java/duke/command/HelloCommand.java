@@ -21,6 +21,6 @@ public class HelloCommand extends Command {
      */
     public String execute(TaskList tasks, Storage storage) {
         return "Hello boss! I am Bunnie, your personal assistant! Use any of my following commands:\n"
-                + "hello, list, delete, find, todo, deadline, event, postpone, bye";
+                + "hello, list, delete, find, done, todo, deadline, event, postpone, bye";
     }
 }

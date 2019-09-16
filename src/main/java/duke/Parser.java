@@ -72,7 +72,7 @@ public class Parser {
             }
         default:
             throw new DukeException("I'm sorry, but I don't know what that means! Please use one of the "
-                    + "following instructions:\nhello, list, delete, find, todo, deadline, event, postpone, bye");
+                    + "following instructions:\nhello, list, delete, find, done, todo, deadline, event, postpone, bye");
         }
     }
 
