@@ -1,11 +1,5 @@
-T | 0 | hello
-T | 0 | eat
-D | 0 | shit | 20/08/2001 2000
-D | 0 | eat | every Tuesday 1800
-T | 0 | hello
-T | 0 | eat
-T | 0 | bye
-T | 0 | hello
-T | 0 | eat
-T | 0 | eat
-T | 0 | eat
+D | 0 | CS2103 Individual Project | 18/09/2019 2359
+E | 0 | Dinner with Friends | 16/09/2019 1800 | 2000
+T | 1 | Clean Room
+T | 0 | Apply for Exchange
+T | 0 | Buy Dinner
