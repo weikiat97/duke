@@ -33,18 +33,19 @@ public class DukeTest {
         try {
             Event event = new Event("", "", "");
         } catch (DukeException e) {
-            assertEquals("Error in format! Event must be written in \"(event name) "
-                    + "/at dd/MM/yyyy HHmm to HHmm\" format", e.getMessage());
+            assertEquals("Hmmm, that's not right! The description of an event cannot be empty! "
+                    + "(Format: \"event (event name) /at dd/MM/yyyy HHmm to HHmm\")", e.getMessage());
         }
     }
 
     @Test
     public void testUnkonwnParser() {
         try {
-            Command c = Parser.parse("hello");
+            Command c = Parser.parse("randomCommand");
         } catch (DukeException e) {
-            assertEquals("Invalid command! Please use one of the following commands:\n"
-                    + "list, delete, find, todo, deadline, event, bye", e.getMessage());
+            assertEquals("I'm sorry, but I don't know what that means! Please use one of the "
+                    + "following instructions:\nhello, list, delete, find, done, todo, deadline, event, postpone, bye",
+                    e.getMessage());
         }
     }
 

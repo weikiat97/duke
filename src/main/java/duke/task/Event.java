@@ -68,10 +68,10 @@ public class Event extends Task {
         } catch (ParseException e) {
             if (isEveryWeek) {
                 throw new DukeException("Hmmm, that's not right! Please try the recurring event again! "
-                        + "event (Format: \"(event name) /at every (recurring day)\")");
+                        + "(Format: \"event (event name) /at every (recurring day)\")");
             } else {
                 throw new DukeException("Hmmm, that's not right! Please try again! "
-                        + "event (Format: \"(event name) /at dd/MM/yyyy HHmm to HHmm\")");
+                        + "(Format: \"event (event name) /at dd/MM/yyyy HHmm to HHmm\")");
             }
         }
     }
