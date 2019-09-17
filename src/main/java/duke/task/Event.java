@@ -42,10 +42,10 @@ public class Event extends Task {
             String[] splitBy = startTime.split(" ");
             if (job.equals("")) {
                 throw new DukeException("Hmmm, that's not right! The description of an event cannot be empty! "
-                        + "(Format: \"event (event name) /at dd/MM/yyyy HHmm\")");
+                        + "(Format: \"event (event name) /at dd/MM/yyyy HHmm to HHmm\")");
             } else if (startTime.equals("") || endTime.equals("")) {
                 throw new DukeException("Hmmm, that's not right! The date/time of an event cannot be empty! "
-                        + "(Format: \"event (event name) /at dd/MM/yyyy HHmm\")");
+                        + "(Format: \"event (event name) /at dd/MM/yyyy HHmm to HHmm\")");
             } else if (splitBy[0].equals("every")) {
                 isEveryWeek = true;
                 StringBuilder output = new StringBuilder();
