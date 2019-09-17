@@ -71,7 +71,7 @@ public class Event extends Task {
                         + "event (Format: \"(event name) /at every (recurring day)\")");
             } else {
                 throw new DukeException("Hmmm, that's not right! Please try again! " +
-                        "event (Format: \"(event name) /at dd/MM/yyyy HHmm\")");
+                        "event (Format: \"(event name) /at dd/MM/yyyy HHmm to HHmm\")");
             }
         }
     }
