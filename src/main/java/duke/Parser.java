@@ -1,6 +1,14 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.HelloCommand;
+import duke.command.ExitCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.PostponeCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -44,7 +52,8 @@ public class Parser {
                 return new DeleteCommand(taskNumber2);
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("Hmmm that's not right, please enter a valid integer to"
-                        + " delete a task! (Format: \"delete (integer)\")");            }
+                        + " delete a task! (Format: \"delete (integer)\")");
+            }
         case "event":
             returnCommand = getTask(myArray, "/at", false);
             return new AddCommand(new Event(returnCommand.get(0), returnCommand.get(1), returnCommand.get(2)));
@@ -61,7 +70,8 @@ public class Parser {
                 return new PostponeCommand(taskNumber3, returnCommand);
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("Hmmm that's not right, please enter a valid integer to"
-                        + "postpone a task! (Format: \"postpone (integer) (dd/MM/yyyy HHmm)\")");}
+                        + "postpone a task! (Format: \"postpone (integer) (dd/MM/yyyy HHmm)\")");
+            }
         case "find":
             try {
                 String keyword = myArray[1];

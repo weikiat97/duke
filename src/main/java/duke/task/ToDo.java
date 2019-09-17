@@ -16,7 +16,8 @@ public class ToDo extends Task {
         super(job);
         if (job.equals("")) {
             throw new DukeException("Hmmm, that's not right! The description of a todo cannot be empty! "
-                    + "(Format: \"todo (todo name)\")");        }
+                    + "(Format: \"todo (todo name)\")");
+        }
         changeType("ToDo");
     }
 

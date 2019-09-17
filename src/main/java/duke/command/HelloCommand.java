@@ -9,7 +9,7 @@ import duke.Storage;
 public class HelloCommand extends Command {
 
     /**
-     * Constructor that introduces the command
+     * Constructor that introduces the command.
      */
     public HelloCommand() {
     }
