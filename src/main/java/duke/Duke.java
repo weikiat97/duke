@@ -20,7 +20,7 @@ public class Duke extends Application {
      */
 
     public Duke() {
-        storage = new Storage("./src/main/java/duke/data/duke.txt");
+        storage = new Storage("./bunnie.txt");
         try {
             tasks = storage.readFile();
         } catch (DukeException | IOException e) {

@@ -38,10 +38,10 @@ public class Deadline extends Task {
             String[] splitBy = by.split(" ");
             if (job.equals("")) {
                 throw new DukeException("Hmmm, that's not right! The description of a deadline cannot be empty!"
-                        + "(Format: \"deadline (deadline name) /by dd/MM/yyyy HHmm\")");
+                        + " (Format: \"deadline (deadline name) /by dd/MM/yyyy HHmm\")");
             } else if (by.equals("")) {
                 throw new DukeException("Hmmm, that's not right! The date/time of a deadline cannot be empty!"
-                        + "(Format: \"deadline (deadline name) /by dd/MM/yyyy HHmm\")");
+                        + " (Format: \"deadline (deadline name) /by dd/MM/yyyy HHmm\")");
             } else if (splitBy[0].equals("every")) {
                 isEveryWeek = true;
                 StringBuilder output = new StringBuilder();

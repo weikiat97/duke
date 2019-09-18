@@ -35,6 +35,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        printWelcomeMessage();
     }
 
     /**
@@ -59,5 +60,14 @@ public class MainWindow extends AnchorPane {
             };
             timer.schedule(exitGui, 1000);
         }
+    }
+
+    private void printWelcomeMessage() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Welcome! I am Bunnie, your personal assistant!\n"
+                        + "You can use the following commands to help you add tasks to your tasklist:\n"
+                        + "hello, list, delete, find, done, todo, deadline, event, postpone, bye\n"
+                        + "Data will be stored in bunnie.txt file in the same folder! ^.^", dukeImage)
+        );
     }
 }

@@ -70,7 +70,7 @@ public class Parser {
                 return new PostponeCommand(taskNumber3, returnCommand);
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("Hmmm that's not right, please enter a valid integer to"
-                        + "postpone a task! (Format: \"postpone (integer) (dd/MM/yyyy HHmm)\")");
+                        + " postpone a task! (Format: \"postpone (integer) (dd/MM/yyyy HHmm)\")");
             }
         case "find":
             try {
