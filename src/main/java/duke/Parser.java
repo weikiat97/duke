@@ -1,14 +1,15 @@
 package duke;
 
+import duke.command.AddCommand;
 import duke.command.Command;
-import duke.command.HelloCommand;
 import duke.command.ExitCommand;
+import duke.command.HelloCommand;
 import duke.command.DoneCommand;
 import duke.command.ListCommand;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 import duke.command.PostponeCommand;
+import duke.command.ErrorCommand;
+import duke.command.DeleteCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -41,7 +42,7 @@ public class Parser {
                 int taskNumber = Integer.parseInt(myArray[1]);
                 return new DoneCommand(taskNumber);
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("Hmmm that's not right, please enter a valid integer to"
+                return new ErrorCommand("Hmmm that's not right, please enter a valid integer to"
                         + " complete a task! (Format: \"done (integer)\")");
             }
         case "list":
@@ -51,7 +52,7 @@ public class Parser {
                 int taskNumber2 = Integer.parseInt(myArray[1]);
                 return new DeleteCommand(taskNumber2);
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("Hmmm that's not right, please enter a valid integer to"
+                return new ErrorCommand("Hmmm that's not right, please enter a valid integer to"
                         + " delete a task! (Format: \"delete (integer)\")");
             }
         case "event":
@@ -69,7 +70,10 @@ public class Parser {
                 returnCommand = postponeTask(myArray);
                 return new PostponeCommand(taskNumber3, returnCommand);
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("Hmmm that's not right, please enter a valid integer to"
+                return new ErrorCommand("Hmmm that's not right, please enter a valid integer to"
+                        + " postpone a task! (Format: \"postpone (integer) (dd/MM/yyyy HHmm)\")");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return new ErrorCommand("Hmmm that's not right, please enter a valid integer to"
                         + " postpone a task! (Format: \"postpone (integer) (dd/MM/yyyy HHmm)\")");
             }
         case "find":
@@ -77,7 +81,7 @@ public class Parser {
                 String keyword = myArray[1];
                 return new FindCommand(keyword);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("Hmmm that's not right, please enter a keyword to find!"
+                return new ErrorCommand("Hmmm that's not right, please enter a keyword to find!"
                         + " (Format: \"find (keyword)\")");
             }
         default:
